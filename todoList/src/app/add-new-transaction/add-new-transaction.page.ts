@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { type } from 'os';
 
 @Component({
   selector: 'app-add-new-transaction',
@@ -8,27 +9,36 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddNewTransactionPage implements OnInit {
 
-    type = string; 
-    amount 
-    status = 'open'; //payed and open
-    description: string;
-    transactionObj
+  type
+  description
+  amount
+  transactionObj
+  status: string = 'open'; //payed and open
+  
 
+  /*
+    type: string ='aaa'; 
+    amount: number = 1; 
+    status: string = 'open'; //payed and open
+    description: string = 'my desc';
+    transactionObj: any = [];
+ */
   constructor(public modalCtrl:ModalController) { }
 
   ngOnInit() {
   }
 
   addTransaction(){
-    this.transactionObj = ({itemDescription:this.description,
-                            itemAmount:this.amount,
-                            itemStatus:this.status,
-                            itemType:this.type})
+    this.transactionObj = ({description:this.description,
+                            amount:this.amount,
+                            status:this.status,
+                            type:this.type})
+      this.dismiss();
   }
 
   async dismiss(){
     await this.modalCtrl.dismiss(this.transactionObj);
-
+    
   }
 
 }

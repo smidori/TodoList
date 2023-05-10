@@ -13,7 +13,12 @@ export class DetailPage implements OnInit {
   transactions = [];
 
   constructor(public modalCtrl:ModalController) { 
-    
+    let trx1 = ({description:'description test',
+      amount:1,
+      status:'open',
+      type:'borrow'})
+
+    this.transactions.push(trx1);
   }
 
   ngOnInit() {
@@ -24,15 +29,14 @@ export class DetailPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component:AddNewTransactionPage
     })
-
-    modal.onDidDismiss.then((newTrxObj: any)=> {
-      //console.log(newTrxObj.data);
-      
-        console.log(newTrxObj.data);
-        return this.transactions.push(newTrxObj.data as never); //??????
+    modal.onDidDismiss().then((newTrxObj)=> {
+        console.log("trxxxxxxxx: " + newTrxObj.data)
+        console.log("transactions length: " + this.transactions.length);
+        this.transactions.push(newTrxObj.data as never); //??????
+        console.log("transactions: " + this.transactions[0]);
+        console.log("transactions length: " + this.transactions.length);
     })
-
-    return await modal.present()
+     await modal.present()
   }
 
 

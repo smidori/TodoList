@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  personId
   people: Person[] = [];
   
   //p1 = new Person("Elaine").addTransaction("borrow", "rent for Renan", 100, "open");
@@ -63,13 +63,14 @@ export class HomePage {
   }
 
 
-  async goDetails(){
+  async goDetails(id: number){
     const modal = await this.modalCtrl.create({
       component: DetailPage
-      //let person = this.people[index]
-
     })
-    return await modal.present();
+    
+    this.personId = this.people[id];
+
+    await modal.present();
   }
 
   
